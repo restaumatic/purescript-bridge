@@ -86,3 +86,11 @@ cs :: [DataConstructor 'PureScript]
 psB :: SumType 'PureScript
 psB@(SumType t cs) = bridgeSumType (buildBridge defaultBridge) b
 
+
+
+recordFieldsPrimitive :: [RecordEntry 'Haskell]
+recordFieldsPrimitive =
+  [ RecordEntry "_name" (mkTypeInfo (Proxy :: Proxy String))
+  , RecordEntry "_age" (mkTypeInfo (Proxy :: Proxy Int))
+  ]
+
