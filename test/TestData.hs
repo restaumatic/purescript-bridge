@@ -87,6 +87,7 @@ psB :: SumType 'PureScript
 psB@(SumType t cs) = bridgeSumType (buildBridge defaultBridge) b
 
 
+type TheAlias = Foo
 
 recordFieldsPrimitive :: [RecordEntry 'Haskell]
 recordFieldsPrimitive =

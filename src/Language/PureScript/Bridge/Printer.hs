@@ -137,7 +137,7 @@ sumTypeToTypeDecls st@(SumType t cs) = T.unlines $
     isSingletonList [_] = True
     isSingletonList _   = False
 sumTypeToTypeDecls (TypeAlias t rs) =
-  "type " <> typeInfoToText True t <> " = " <> recordToText 4 rs
+  "type " <> typeInfoToText True t <> " =" <> recordToText 4 rs
 
 sumTypeToOptics :: SumType 'PureScript -> Text
 sumTypeToOptics st = constructorOptics st <> recordOptics st

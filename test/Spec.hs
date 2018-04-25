@@ -297,12 +297,14 @@ allTests =
 
     it "tests generation of type aliases" $
       let recType = bridgeSumType (buildBridge defaultBridge)
-            (mkRecordType (Proxy :: Proxy Foo) "TheAlias" recordFieldsPrimitive)
+            (mkRecordType (Proxy :: Proxy TheAlias) "TheAlias" recordFieldsPrimitive)
           recTypeText = sumTypeToText recType
           txt = T.stripEnd $
-            T.unlines [ "type TheAlias ="
-                      , "    {"
+            T.unlines [ "type TheAlias = {"
                       , "      _name :: String"
                       , "    , _age :: Int"
-                      , "    }"]
+                      , "    }"
+                      , "--------------------------------------------------------------------------------"
+                      , "--------------------------------------------------------------------------------"
+                      ]
       in recTypeText `shouldBe` txt
