@@ -296,8 +296,9 @@ allTests =
       in recTypeOptics `shouldBe` "" -- No record optics for multi-constructors
 
     it "tests generation of type aliases" $
-      let recType = bridgeSumType (buildBridge defaultBridge)
-            (mkRecordType (Proxy :: Proxy TheAlias) "TheAlias" recordFieldsPrimitive)
+      let typeInfo = (mkTypeInfo (Proxy :: Proxy TheAlias)) { _typeName = "TheAlias" }
+          recType = bridgeSumType (buildBridge defaultBridge)
+                                  (mkRecordType typeInfo recordFieldsPrimitive)
           recTypeText = sumTypeToText recType
           txt = T.stripEnd $
             T.unlines [ "type TheAlias = {"
@@ -310,8 +311,10 @@ allTests =
       in recTypeText `shouldBe` txt
 
     it "tests generation of type aliases with non prim types" $
-      let recType = bridgeSumType (buildBridge defaultBridge)
-            (mkRecordType (Proxy :: Proxy TheAlias2) "TheAlias2" recordFields)
+      let typeInfo = (mkTypeInfo (Proxy :: Proxy TheAlias2)) { _typeName = "TheAlias2" }
+          recType = bridgeSumType (buildBridge defaultBridge)
+                                  (mkRecordType typeInfo recordFields)
+
           recTypeText = sumTypeToText recType
           txt = T.stripEnd $
             T.unlines [ "type TheAlias2 = {"

@@ -61,10 +61,8 @@ mkSumType p = SumType  (mkTypeInfo p) constructors
   where
     constructors = gToConstructors (from (undefined :: t))
 
-mkRecordType :: Typeable t => Proxy t -> Text -> [RecordEntry 'Haskell] -> SumType 'Haskell
-mkRecordType p alias fields = TypeAlias (typeInfo { _typeName = alias }) fields
-  where
-    typeInfo = mkTypeInfo p
+mkRecordType :: TypeInfo 'Haskell -> [RecordEntry 'Haskell] -> SumType 'Haskell
+mkRecordType ti fields = TypeAlias ti fields
 
 data DataConstructor (lang :: Language) =
   DataConstructor { _sigConstructor :: !Text -- ^ e.g. `Left`/`Right` for `Either`
